@@ -464,7 +464,7 @@ GameScreen.prototype.showSideBar =function(){
 	function slideFromRight(obj){
 		obj.animate("left", canvas.width - 20 - obj.width, {duration: 100})
 	}
-	slideFromRight(this.timeCounter.label);
+	this.timeCounter.label.animate("left", canvas.width - 20, {duration:100});
 	setTimeout(function(){ slideFromRight(self.timeCounter.group); }, 30);
 }
 
