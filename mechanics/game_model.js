@@ -33,6 +33,7 @@ var GameField = function(){
 	this.recordDeleted = getHighScore();
 
 	this.startTime = 0;
+	this.gameover = false;
 }
 
 GameField.prototype.setGraphics = function(graphics){
@@ -52,7 +53,6 @@ GameField.prototype.generateNextRow = function(){
 }
 
 GameField.prototype.getTimeForRow = function(){
-	// return 0;
 	return (1 - Math.atan(this.rowsGenerated / 6) / Math.PI * 2) * 1500 + 500;
 }
 
@@ -103,6 +103,7 @@ GameField.prototype.dropRow = function(callback){
 				self.generateNextRow();				
 				callback();
 			}else{
+				self.gameover = true;
 				var record = false;
 				if (self.blocksDeleted > getHighScore()){
 					setHighScore(self.blocksDeleted);
@@ -151,6 +152,7 @@ GameField.prototype.findGroup = function(column, row){
 }
 
 GameField.prototype.clicked = function(column, row){
+	if (this.gameover) return;
 	var group = this.findGroup(column, row);
 	if (group.length >= 3){
 
