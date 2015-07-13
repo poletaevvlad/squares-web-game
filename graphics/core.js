@@ -63,14 +63,14 @@ window.onload = function(){
 	});
 
 	canvas.on("mouse:up", function(e){
-		if (activeButton != null){
+		if (activeButton != null && ! activeButton.clicked){
+			activeButton.clicked = true;
 			activeButton.onClick();
 		}
 	})
 
-	// initAPI(function(){
-		setScene(MainMenu);
-	// });
+	
+	setScene(MainMenu);
 	window.onclick = function(e){
 		if (scene != null && typeof scene.onClick != "undefined"){
 			scene.onClick(e);
